@@ -185,6 +185,12 @@ $scriptBlock_LEDSpeedDisplay = {
 
 # set up our ALLUSERSPROFILE directories
 new-item -itemtype directory "$($env:ALLUSERSPROFILE)\LEDSpeedDisplay" -Force
+
+$ACL = Get-ACL -Path "C:\ProgramData\LEDSpeedDisplay\" 
+$AccessRule = New-Object System.Security.AccessControl.FileSystemAccessRule("BUILTIN\Users","Modify","ContainerInherit,ObjectInherit", "None", "Allow")
+$ACL.SetAccessRule($AccessRule) 
+$ACL | Set-Acl -Path "C:\ProgramData\LEDSpeedDisplay\"
+
 remove-item "$($env:ALLUSERSPROFILE)\LEDSpeedDisplay\exit" -force
 
 # Clean up old/hung processes
