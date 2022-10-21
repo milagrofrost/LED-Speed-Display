@@ -178,10 +178,7 @@ $scriptBlock_LEDSpeedDisplay = {
 
 # Powershell script starts here...... Then calls the script blocks above in separate running jobs
 
-# Make PowerShell Disappear
-# $windowcode = '[DllImport("user32.dll")] public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);'
-# $asyncwindow = Add-Type -MemberDefinition $windowcode -name Win32ShowWindowAsync -namespace Win32Functions -PassThru
-# $null = $asyncwindow::ShowWindowAsync((Get-Process -PID $pid).MainWindowHandle, 0)
+
 
 # set up our ALLUSERSPROFILE directories.  Give all users permission to edit the cached settings folder
 new-item -itemtype directory "$($env:ALLUSERSPROFILE)\LEDSpeedDisplay" -Force
@@ -190,6 +187,8 @@ $ACL = Get-ACL -Path "C:\ProgramData\LEDSpeedDisplay\"
 $AccessRule = New-Object System.Security.AccessControl.FileSystemAccessRule("BUILTIN\Users","Modify","ContainerInherit,ObjectInherit", "None", "Allow")
 $ACL.SetAccessRule($AccessRule) 
 $ACL | Set-Acl -Path "C:\ProgramData\LEDSpeedDisplay\"
+
+
 
 remove-item "$($env:ALLUSERSPROFILE)\LEDSpeedDisplay\exit" -force
 
