@@ -183,7 +183,7 @@ $scriptBlock_LEDSpeedDisplay = {
 # $asyncwindow = Add-Type -MemberDefinition $windowcode -name Win32ShowWindowAsync -namespace Win32Functions -PassThru
 # $null = $asyncwindow::ShowWindowAsync((Get-Process -PID $pid).MainWindowHandle, 0)
 
-# set up our ALLUSERSPROFILE directories
+# set up our ALLUSERSPROFILE directories.  Give all users permission to edit the cached settings folder
 new-item -itemtype directory "$($env:ALLUSERSPROFILE)\LEDSpeedDisplay" -Force
 
 $ACL = Get-ACL -Path "C:\ProgramData\LEDSpeedDisplay\" 
