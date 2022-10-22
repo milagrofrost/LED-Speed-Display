@@ -1,1 +1,1 @@
-todo
+systray.png

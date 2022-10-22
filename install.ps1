@@ -46,7 +46,7 @@ if ("LED Speed Display Systray" -in $schedTasks.taskname ) {
 else {
     Write-host "Systray scheduled task does not exist.  Creating..."
     $trigger = New-ScheduledTaskTrigger -AtLogOn
-    $action = New-ScheduledTaskAction -execute "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Argument '-ExecutionPolicy Bypass -file "c:\LED Speed Display\LED Speed Display - Systray.ps1"'
+    $action = New-ScheduledTaskAction -execute "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Argument '-windowstyle hidden -ExecutionPolicy Bypass -file "c:\LED Speed Display\LED Speed Display - Systray.ps1"'
     $settingsSet = New-ScheduledTaskSettingsSet -ExecutionTimeLimit '00:00:00'
     $task = New-ScheduledTask -Trigger $trigger -Action $action -Settings $settingsSet
     Register-ScheduledTask -TaskName "LED Speed Display Systray" -InputObject $task
@@ -94,7 +94,7 @@ Write-host "Serial name set in $($env:ALLUSERSPROFILE)\LEDSpeedDisplay\COM_name"
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
 #install nssm
-choco install nssm
+choco install nssm -y
 
 # setup nssm for the LED Speed Display system service
 nssm install LEDSpeedDisplay C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe
@@ -109,7 +109,7 @@ nssm start LEDSpeedDisplay
 
 # Setup complete.  check the logs.
 
-Write-host "`n`nSetup is complete.  Hit enter to start looking at the logs to see if we are communicating with the device."
-Write-host "or close just close this window and enjoy!"
-read-host "Hit Enter to view logs for LED Speed Display (Located at $($env:ALLUSERSPROFILE)\LEDSpeedDisplay\log.txt"
-get-content "$($env:ALLUSERSPROFILE)\LEDSpeedDisplay\log.txt" -tail 10 -wait
+Write-host "`n`nSetup is complete. "
+Write-host "Close this window and RESTART and then enjoy!"
+Write-host "Again.... PLEASE RESTART for the LED Speed Display service to work properly.  (for some reason)"
+Read-Host "Okay.  Goodbye!"
