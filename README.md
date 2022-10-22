@@ -5,7 +5,7 @@
 # What
 
 ![Faceplate](https://raw.githubusercontent.com/milagrofrost/LED-Speed-Display/main/pics/The%20product.jpg)
-
+![Wiring](https://raw.githubusercontent.com/milagrofrost/LED-Speed-Display/main/pics/IRL-wiring.jpg | width=600)
 This is replicating the gimmicky TURBO button and CPU and displays of the old 486-ish machines of yesteryear.  But this is build is for those who'd like to have the same retro feel and gimmicks for their modern machine!
 
 There are two main components of this build.  An Arduino or ESP32/ESP8266 or similar microcontroller and then your Windows PC.  These two components communicate with each other over serial to gather PC info and displaying it onto a 3 digit 7-segment display.  
